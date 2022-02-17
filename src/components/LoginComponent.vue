@@ -6,14 +6,26 @@
 
     <div id="username">
       <label id="usernameLabel">Username:</label>
-      <textarea v-model="username"></textarea>
+      <textarea
+          data-testid="username-input"
+          v-model="username"
+      ></textarea>
     </div>
 
     <div id="password">
       <label id="passwordLabel">Password: </label>
-      <textarea v-model="password"></textarea>
-      <button v-on:click="handleClickSignin_2">Sign in</button>
-      <label id="loginstatusLabel">{{ loginStatus }}</label>
+      <textarea
+          data-testid="password-input"
+          v-model="password"
+      ></textarea>
+      <button
+          v-on:click="handleClickSignin_2"
+          data-testid="submit-button"
+      >Sign in</button>
+      <label
+          id="loginstatusLabel"
+          data-testid="login-status-label"
+      >{{ loginStatus }}</label>
     </div>
   </div>
 </template>
@@ -41,7 +53,7 @@ export default {
       console.log(loginRequest);
       let login = await doLogin(loginRequest);
       if (login) {
-        this.loginStatus = "logged in";
+        this.loginStatus = "Logged in";
         console.log("success!");
       } else {
         this.loginStatus = "something went wrong";
