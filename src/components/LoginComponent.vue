@@ -1,18 +1,22 @@
 <template>
   <div id="loginContainer">
+
     <div id="loginTitle">
       <label>Please login!</label>
     </div>
+
     <div id="username">
       <label id="usernameLabel">Username:</label>
       <textarea v-model="username"></textarea>
     </div>
+
     <div id="password">
       <label id="passwordLabel">Password: </label>
       <textarea v-model="password"></textarea>
       <button v-on:click="handleClickSignin_2">Sign in</button>
       <label id="loginstatusLabel">{{ loginStatus }}</label>
     </div>
+
   </div>
 </template>
 
