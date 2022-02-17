@@ -1,6 +1,5 @@
 <template>
   <div id="loginContainer">
-
     <div id="loginTitle">
       <label>Please login!</label>
     </div>
@@ -16,12 +15,12 @@
       <button v-on:click="handleClickSignin_2">Sign in</button>
       <label id="loginstatusLabel">{{ loginStatus }}</label>
     </div>
-
   </div>
 </template>
 
 <script>
 //import { doLogin } from "@/utils/apiutil.js"; //TODO do something about this
+import { doLogin } from "../utils/api";
 
 export default {
   name: "LoginComponent",
@@ -37,9 +36,17 @@ export default {
       console.log(loginResponse);
       alert("Login: " + loginResponse.data.loginStatus);*/
     },
-    handleClickSignin_2() {
+    async handleClickSignin_2() {
       const loginRequest = { username: this.username, password: this.password };
       console.log(loginRequest);
+      let login = await doLogin(loginRequest);
+      if (login) {
+        this.loginStatus = "logged in";
+        console.log("success!");
+      } else {
+        this.loginStatus = "something went wrong";
+        console.log("fail!");
+      }
       /*const loginResponse = doLogin( //TODO do something about this
         "http://localhost:8085/demo/login",
         loginRequest
