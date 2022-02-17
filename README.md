@@ -24,4 +24,5 @@ yarn lint
 See [Configuration Reference](https://cli.vuejs.org/config/).
 
 ### DB
+docs: https://my-json-server.typicode.com/  
 database: https://my-json-server.typicode.com/williamgt/extend-login 
