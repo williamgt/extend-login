@@ -5,11 +5,11 @@
     <input
       type="text"
       id="uuid"
-      v-bind="inputValue"
-      :value="inputValue"
-      @input="$emit('update:inputValue', $event.target.value)"
+      :placeholder="labelName"
+      v-bind="$attrs"
+      :value="modelValue"
+      @input="$emit('update:modelValue', $event.target.value)"
     />
-    <!-- Add an $emit onchange, maybe. Maybe that is too much. Add some way to emit the value, at least -->
   </fieldset>
 </template>
 
@@ -22,7 +22,7 @@ export default {
       type: String,
       required: true, //Maybe add default value
     },
-    inputValue: { //Rename to modelValue if issues
+    modelValue: { //Rename to modelValue if issues. update: I had issues, but they were resolved after changing to modelValue
       type: [String, Number],
       default: "",
     },

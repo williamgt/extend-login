@@ -31,12 +31,13 @@ describe("LoginComponent", () => {
   });
 
   it("Signing in with right username and password", async () => {
-    doLogin.mockReturnValueOnce(true); //Maybe mock return value instead
+    await doLogin.mockReturnValueOnce(true); //Maybe mock return value instead
     let wrapper = mount(LoginComponent);
+    wrapper.find("button").trigger("click"); //Remember! You are mocking the actual componenet, remember to use them
 
     await flushPromises();
 
-    //expect(doLogin).toHaveBeenCalledTimes(1);
+    expect(doLogin).toHaveBeenCalledTimes(1);
     const message = wrapper.find('[data-testid="login-status-label"]').text();
     expect(message).toEqual("Logged in"); //TODO this is really bad
   });

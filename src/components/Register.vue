@@ -1,66 +1,67 @@
 <template>
   <div>
     <h1>Register yourself</h1>
-    <form>
-      <fieldset>
-        <InputReusable
-          label-name="full-name"
-          v-model="fullName"
-        ></InputReusable>
-      </fieldset>
+    <form @submit.prevent="sendForm">
+      <InputReusable
+        label-name="Full name"
+        v-model="user.fullName"
+      ></InputReusable>
 
-      <fieldset>
-        <InputReusable
-            label-name="address"
-            v-model="address"
-        ></InputReusable>
-      </fieldset>
+      <InputReusable
+          label-name="Address"
+          v-model="user.address"
+      ></InputReusable>
 
-      <fieldset>
-        <InputReusable
-            label-name="username"
-            v-model="username"
-        ></InputReusable>
-      </fieldset>
+      <InputReusable
+          label-name="Username"
+          v-model="user.username"
+      ></InputReusable>
 
-      <fieldset>
-        <InputReusable
-            label-name="password"
-            v-model="password"
-        ></InputReusable>
-      </fieldset>
+      <InputReusable
+          label-name="Password"
+          v-model="user.password"
+      ></InputReusable>
 
-      <fieldset>
-        <InputReusable
-            label-name="email"
-            v-model="email"
-        ></InputReusable>
-      </fieldset>
+      <InputReusable
+          label-name="Email"
+          v-model="user.email"
+      ></InputReusable>
 
-      <fieldset>
-        <InputReusable
-            label-name="phone"
-            v-model="phone"
-        ></InputReusable>
-      </fieldset>
+      <InputReusable
+          label-name="Phone"
+          v-model="user.phone"
+      ></InputReusable>
+
+      <button type="submit">Submit</button>
     </form>
   </div>
 </template>
 
 <script>
 import InputReusable from "../reusables/InputReusable";
+import { sendForm2 } from "../utils/api";
+
 export default {
   name: "Register",
   components: { InputReusable },
   data() {
     return {
-      fullName: "",
-      address: "",
-      username: "",
-      password: "",
-      email: "",
-      phone: "",
+      user: {
+        fullName: "",
+        address: "",
+        username: "",
+        password: "",
+        email: "",
+        phone: "",
+        id: "",
+      },
     };
+  },
+  methods: {
+    sendForm() {
+      this.user.id = 1;
+      sendForm2(this.user);
+    },
   },
 };
 </script>

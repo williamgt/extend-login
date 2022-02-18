@@ -27,6 +27,7 @@
           data-testid="login-status-label"
       >{{ loginStatus }}</label>
     </div>
+    <p>You are not registered yet. Register here</p>
   </div>
 </template>
 
@@ -36,6 +37,14 @@ import { doLogin } from "../utils/api";
 
 export default {
   name: "LoginComponent",
+  data() {
+    return {
+      username: "",
+      password: "",
+      loginStatus: "",
+      notYetRegistered: false,
+    };
+  },
   methods: {
     async handleClickSignin() {
       //alert("You entered, username: " + this.username);
@@ -58,6 +67,7 @@ export default {
       } else {
         this.loginStatus = "something went wrong";
         console.log("fail!");
+        this.notYetRegistered = true;
       }
       /*const loginResponse = doLogin( //TODO do something about this
         "http://localhost:8085/demo/login",
@@ -69,13 +79,6 @@ export default {
         // alert("Login2: " + resolvedResult.data.loginStatus);
       });*/
     },
-  },
-  data() {
-    return {
-      username: "",
-      password: "",
-      loginStatus: "",
-    };
   },
 };
 </script>
