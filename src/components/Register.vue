@@ -4,7 +4,7 @@
     <form @submit.prevent="sendForm">
       <InputReusable
         label-name="Full name"
-        v-model="user.fullName"
+        v-model="user.name"
       ></InputReusable>
 
       <InputReusable
@@ -47,7 +47,7 @@ export default {
   data() {
     return {
       user: {
-        fullName: "",
+        name: "",
         address: "",
         username: "",
         password: "",
@@ -61,6 +61,8 @@ export default {
     sendForm() {
       this.user.id = 1;
       sendForm2(this.user);
+      this.$store.dispatch("registerUser", this.user);
+      this.$router.push("/home");
     },
   },
 };

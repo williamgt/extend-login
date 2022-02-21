@@ -1,5 +1,5 @@
 <template>
-  <h1>Hello INSERT_NAME_HERE</h1>
+  <h1>Hello {{ this.$store.state.user.name }}</h1>
   <p>You are registered and ready to go</p>
 </template>
 
