@@ -36,19 +36,36 @@ describe("LoginComponent", () => {
 
   it("Signing in with right username and password", async () => {
     await doLogin.mockReturnValueOnce(true); //Maybe mock return value instead
-    let wrapper = mount(LoginComponent);
+    let mockRouter = {
+      push: jest.fn(),
+    };
+    let wrapper = mount(LoginComponent, {
+      global: {
+        stubs: ["router-link"],
+        mocks: {
+          $router: mockRouter,
+        },
+      },
+    });
     await wrapper.find("button").trigger("click"); //Remember! You are mocking the actual componenet, remember to use them
 
     await flushPromises();
 
     expect(doLogin).toHaveBeenCalledTimes(1);
+    expect(mockRouter.push).toHaveBeenCalledTimes(1);
+    expect(mockRouter.push).toHaveBeenLastCalledWith("/home");
     const message = wrapper.find('[data-testid="login-status-label"]').text();
     expect(message).toEqual("Logged in"); //TODO this is really bad
   });
 
   it("Signing in with wrong username and password", async () => {
     await doLogin.mockReturnValueOnce(false); //Maybe mock return value instead
-    let wrapper = mount(LoginComponent);
+
+    let wrapper = mount(LoginComponent, {
+      global: {
+        stubs: ["router-link"],
+      },
+    });
     await wrapper.find("button").trigger("click"); //Remember! You are mocking the actual componenet, remember to use them
 
     await flushPromises();

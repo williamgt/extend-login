@@ -27,7 +27,7 @@
           data-testid="login-status-label"
       >{{ loginStatus }}</label>
     </div>
-    <p v-if="notYetRegistered">You are not registered yet. Register <router-link :to="{ name: 'Register' }">here</router-link></p>
+    <p v-if="notYetRegistered">You are not registered yet. Register <router-link :to="{ name: 'Register' }">here</router-link>.</p>
   </div>
 
 </template>
@@ -66,7 +66,7 @@ export default {
         this.loginStatus = "Logged in";
         console.log("success!");
         this.notYetRegistered = false;
-        await this.$router.push("/home");
+        this.$router.push("/home"); //TODO fix related to test
       } else {
         this.loginStatus = "Something went wrong";
         console.log("fail!");

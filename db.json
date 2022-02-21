@@ -1,7 +1,13 @@
 {
   "users": [
     {
-      "username": "williagt", "password": "pass"
+      "name": "William G. T.",
+      "address": "Her",
+      "username": "williagt",
+      "password": "pass",
+      "email": "mail@mail.mail",
+      "phone": "12312312",
+      "id": "69"
     }
   ]
 }
