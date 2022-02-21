@@ -1,18 +1,13 @@
 <template>
-  <LoginComponent></LoginComponent>
-  <Register></Register>
+  <router-view/>
+
 </template>
 
 <script>
-import LoginComponent from "./components/LoginComponent";
-import Register from "./components/Register";
+
 
 export default {
   name: "App",
-  components: {
-    Register,
-    LoginComponent,
-  },
 };
 </script>
 

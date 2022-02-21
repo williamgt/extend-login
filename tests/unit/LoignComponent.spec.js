@@ -5,6 +5,10 @@ import flushPromises from "flush-promises";
 
 jest.mock("../../src/utils/api"); //Mocking doLogin
 
+afterEach(() => {
+  jest.clearAllMocks();
+});
+
 describe("LoginComponent", () => {
   it("Input fields are empty by default", () => {
     let wrapper = mount(LoginComponent);
@@ -33,12 +37,24 @@ describe("LoginComponent", () => {
   it("Signing in with right username and password", async () => {
     await doLogin.mockReturnValueOnce(true); //Maybe mock return value instead
     let wrapper = mount(LoginComponent);
-    wrapper.find("button").trigger("click"); //Remember! You are mocking the actual componenet, remember to use them
+    await wrapper.find("button").trigger("click"); //Remember! You are mocking the actual componenet, remember to use them
 
     await flushPromises();
 
     expect(doLogin).toHaveBeenCalledTimes(1);
     const message = wrapper.find('[data-testid="login-status-label"]').text();
     expect(message).toEqual("Logged in"); //TODO this is really bad
+  });
+
+  it("Signing in with wrong username and password", async () => {
+    await doLogin.mockReturnValueOnce(false); //Maybe mock return value instead
+    let wrapper = mount(LoginComponent);
+    await wrapper.find("button").trigger("click"); //Remember! You are mocking the actual componenet, remember to use them
+
+    await flushPromises();
+
+    expect(doLogin).toHaveBeenCalledTimes(1);
+    const message = wrapper.find('[data-testid="login-status-label"]').text();
+    expect(message).toEqual("Something went wrong"); //TODO this is really bad
   });
 });

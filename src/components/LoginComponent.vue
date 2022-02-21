@@ -27,8 +27,9 @@
           data-testid="login-status-label"
       >{{ loginStatus }}</label>
     </div>
-    <p>You are not registered yet. Register here</p>
+    <p v-if="notYetRegistered">You are not registered yet. Register <router-link :to="{ name: 'Register' }">here</router-link></p>
   </div>
+
 </template>
 
 <script>
@@ -64,20 +65,13 @@ export default {
       if (login) {
         this.loginStatus = "Logged in";
         console.log("success!");
+        this.notYetRegistered = false;
+        await this.$router.push("/home");
       } else {
-        this.loginStatus = "something went wrong";
+        this.loginStatus = "Something went wrong";
         console.log("fail!");
         this.notYetRegistered = true;
       }
-      /*const loginResponse = doLogin( //TODO do something about this
-        "http://localhost:8085/demo/login",
-        loginRequest
-      );
-      console.log(loginResponse);
-      loginResponse.then((resolvedResult) => {
-        this.loginStatus = resolvedResult.data.loginStatus;
-        // alert("Login2: " + resolvedResult.data.loginStatus);
-      });*/
     },
   },
 };
